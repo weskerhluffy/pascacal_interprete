@@ -1,10 +1,7 @@
 program constants;
-
-Const pi: Integer = 3;
-
-Var c, d: Integer;
-
+Var c, d, pi: Integer;
 Begin
+	pi:=10;
    d := 5;
    c := pi * d;
 End.

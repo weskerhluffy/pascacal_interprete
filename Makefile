@@ -3,7 +3,7 @@ LEXFLAGS=
 YACC=bison
 YACCFLAGS=-v -t -d
 CC=gcc
-CFLAGS=-ggdb
+CFLAGS=-ggdb -fnested-functions
 LIBS=
 PARSER=parser
 SCANNER=scanner
@@ -48,6 +48,9 @@ $(SCANNER).c: $(SCANNER).l
 
 $(PARSER).h: $(PARSER).y
 	$(YACC) $(YACCFLAGS) $(PARSER).y -o $(PARSER).c
+
+caca: $(OBJS)
+	$(CC) $(LIBS) $(OBJS) -o $(PROGRAM)
 
 clean:
 	rm -rf $(SCANNER).c $(PARSER).c $(PARSER).h *.o $(PROGRAM)

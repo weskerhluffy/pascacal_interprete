@@ -1,0 +1,396 @@
+Starting parse
+Entering state 0
+Reading a token: Next token is token T_PROGRAM (1.1-1.7: )
+Shifting token T_PROGRAM (1.1-1.7: )
+Entering state 1
+Reading a token: Next token is token IDENTIFIER (1.8-1.16: )
+Shifting token IDENTIFIER (1.8-1.16: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (1.8-1.16: )
+-> $$ = nterm Identifier (1.8-1.16: )
+Stack now 0 1
+Entering state 5
+Reading a token: Next token is token T_SEMICOLON (1.17-1.17: )
+Shifting token T_SEMICOLON (1.17-1.17: )
+Entering state 11
+Reducing stack by rule 2 (line 172):
+   $1 = token T_PROGRAM (1.1-1.7: )
+   $2 = nterm Identifier (1.8-1.16: )
+   $3 = token T_SEMICOLON (1.17-1.17: )
+-> $$ = nterm ProgramDecl (1.1-1.17: )
+Stack now 0
+Entering state 3
+Reading a token: Next token is token T_VAR (2.1-2.3: )
+Shifting token T_VAR (2.1-2.3: )
+Entering state 7
+Reading a token: Next token is token IDENTIFIER (2.4-2.4: )
+Shifting token IDENTIFIER (2.4-2.4: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (2.4-2.4: )
+-> $$ = nterm Identifier (2.4-2.4: )
+Stack now 0 3 7
+Entering state 14
+Reducing stack by rule 11 (line 236):
+   $1 = nterm Identifier (2.4-2.4: )
+-> $$ = nterm SingleIdentifier (2.4-2.4: )
+Stack now 0 3 7
+Entering state 13
+Reading a token: Next token is token T_COMMA (2.5-2.5: )
+Shifting token T_COMMA (2.5-2.5: )
+Entering state 23
+Reading a token: Next token is token IDENTIFIER (2.6-2.6: )
+Shifting token IDENTIFIER (2.6-2.6: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (2.6-2.6: )
+-> $$ = nterm Identifier (2.6-2.6: )
+Stack now 0 3 7 13 23
+Entering state 14
+Reducing stack by rule 11 (line 236):
+   $1 = nterm Identifier (2.6-2.6: )
+-> $$ = nterm SingleIdentifier (2.6-2.6: )
+Stack now 0 3 7 13 23
+Entering state 32
+Reading a token: Next token is token T_COMMA (2.7-2.7: )
+Shifting token T_COMMA (2.7-2.7: )
+Entering state 23
+Reading a token: Next token is token IDENTIFIER (2.8-2.9: )
+Shifting token IDENTIFIER (2.8-2.9: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (2.8-2.9: )
+-> $$ = nterm Identifier (2.8-2.9: )
+Stack now 0 3 7 13 23 32 23
+Entering state 14
+Reducing stack by rule 11 (line 236):
+   $1 = nterm Identifier (2.8-2.9: )
+-> $$ = nterm SingleIdentifier (2.8-2.9: )
+Stack now 0 3 7 13 23 32 23
+Entering state 32
+Reading a token: Next token is token T_COLON (2.10-2.10: )
+Reducing stack by rule 9 (line 227):
+-> $$ = nterm MultiIdentifier (2.9-2.9: )
+Stack now 0 3 7 13 23 32 23 32
+Entering state 60
+Reducing stack by rule 10 (line 228):
+   $1 = token T_COMMA (2.7-2.7: )
+   $2 = nterm SingleIdentifier (2.8-2.9: )
+   $3 = nterm MultiIdentifier (2.9-2.9: )
+-> $$ = nterm MultiIdentifier (2.7-2.9: )
+Stack now 0 3 7 13 23 32
+Entering state 60
+Reducing stack by rule 10 (line 228):
+   $1 = token T_COMMA (2.5-2.5: )
+   $2 = nterm SingleIdentifier (2.6-2.6: )
+   $3 = nterm MultiIdentifier (2.7-2.9: )
+-> $$ = nterm MultiIdentifier (2.5-2.9: )
+Stack now 0 3 7 13
+Entering state 24
+Reducing stack by rule 8 (line 215):
+   $1 = nterm SingleIdentifier (2.4-2.4: )
+   $2 = nterm MultiIdentifier (2.5-2.9: )
+-> $$ = nterm IdentifierList (2.4-2.9: )
+Stack now 0 3 7
+Entering state 12
+Next token is token T_COLON (2.10-2.10: )
+Shifting token T_COLON (2.10-2.10: )
+Entering state 22
+Reading a token: Next token is token TYPE_IDENTIFIER (2.11-2.17: )
+Shifting token TYPE_IDENTIFIER (2.11-2.17: )
+Entering state 31
+Reading a token: Next token is token T_SEMICOLON (2.18-2.18: )
+Shifting token T_SEMICOLON (2.18-2.18: )
+Entering state 59
+Reducing stack by rule 7 (line 204):
+   $1 = token T_VAR (2.1-2.3: )
+   $2 = nterm IdentifierList (2.4-2.9: )
+   $3 = token T_COLON (2.10-2.10: )
+   $4 = token TYPE_IDENTIFIER (2.11-2.17: )
+   $5 = token T_SEMICOLON (2.18-2.18: )
+-> $$ = nterm VarDecl (2.1-2.18: )
+Stack now 0 3
+Entering state 10
+Reading a token: Next token is token T_BEGIN (3.1-3.5: )
+Reducing stack by rule 5 (line 195):
+-> $$ = nterm MultiVarDecl (2.18-2.18: )
+Stack now 0 3 10
+Entering state 21
+Reducing stack by rule 6 (line 196):
+   $1 = nterm VarDecl (2.1-2.18: )
+   $2 = nterm MultiVarDecl (2.18-2.18: )
+-> $$ = nterm MultiVarDecl (2.1-2.18: )
+Stack now 0 3
+Entering state 9
+Reducing stack by rule 4 (line 184):
+   $1 = nterm MultiVarDecl (2.1-2.18: )
+-> $$ = nterm VarDeclList (2.1-2.18: )
+Stack now 0 3
+Entering state 8
+Next token is token T_BEGIN (3.1-3.5: )
+Reducing stack by rule 12 (line 241):
+-> $$ = nterm ProcFuncList (2.18-2.18: )
+Stack now 0 3 8
+Entering state 17
+Next token is token T_BEGIN (3.1-3.5: )
+Shifting token T_BEGIN (3.1-3.5: )
+Entering state 27
+Reading a token: Next token is token IDENTIFIER (4.1-4.2: )
+Shifting token IDENTIFIER (4.1-4.2: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (4.1-4.2: )
+-> $$ = nterm Identifier (4.1-4.2: )
+Stack now 0 3 8 17 27
+Entering state 57
+Reading a token: Next token is token T_ASSIGNMENT (4.3-4.4: )
+Shifting token T_ASSIGNMENT (4.3-4.4: )
+Entering state 89
+Reading a token: Next token is token INT_LITERAL (4.5-4.6: )
+Shifting token INT_LITERAL (4.5-4.6: )
+Entering state 67
+Reducing stack by rule 88 (line 739):
+   $1 = token INT_LITERAL (4.5-4.6: )
+-> $$ = nterm Literal (4.5-4.6: )
+Stack now 0 3 8 17 27 57 89
+Entering state 78
+Reducing stack by rule 65 (line 577):
+   $1 = nterm Literal (4.5-4.6: )
+-> $$ = nterm Factor (4.5-4.6: )
+Stack now 0 3 8 17 27 57 89
+Entering state 74
+Reducing stack by rule 62 (line 563):
+   $1 = nterm Factor (4.5-4.6: )
+-> $$ = nterm NotFactor (4.5-4.6: )
+Stack now 0 3 8 17 27 57 89
+Entering state 73
+Reducing stack by rule 60 (line 547):
+   $1 = nterm NotFactor (4.5-4.6: )
+-> $$ = nterm Term (4.5-4.6: )
+Stack now 0 3 8 17 27 57 89
+Entering state 72
+Reading a token: Next token is token T_SEMICOLON (4.7-4.7: )
+Reducing stack by rule 58 (line 531):
+   $1 = nterm Term (4.5-4.6: )
+-> $$ = nterm SimpleExpression (4.5-4.6: )
+Stack now 0 3 8 17 27 57 89
+Entering state 71
+Next token is token T_SEMICOLON (4.7-4.7: )
+Reducing stack by rule 56 (line 517):
+   $1 = nterm SimpleExpression (4.5-4.6: )
+-> $$ = nterm Expression (4.5-4.6: )
+Stack now 0 3 8 17 27 57 89
+Entering state 122
+Reducing stack by rule 53 (line 480):
+   $1 = nterm Identifier (4.1-4.2: )
+   $2 = token T_ASSIGNMENT (4.3-4.4: )
+   $3 = nterm Expression (4.5-4.6: )
+-> $$ = nterm Assignment (4.1-4.6: )
+Stack now 0 3 8 17 27
+Entering state 53
+Reducing stack by rule 35 (line 382):
+   $1 = nterm Assignment (4.1-4.6: )
+-> $$ = nterm StatementMatched (4.1-4.6: )
+Stack now 0 3 8 17 27
+Entering state 44
+Reducing stack by rule 33 (line 377):
+   $1 = nterm StatementMatched (4.1-4.6: )
+-> $$ = nterm Statement (4.1-4.6: )
+Stack now 0 3 8 17 27
+Entering state 43
+Next token is token T_SEMICOLON (4.7-4.7: )
+Shifting token T_SEMICOLON (4.7-4.7: )
+Entering state 87
+Reading a token: Next token is token IDENTIFIER (5.1-5.1: )
+Shifting token IDENTIFIER (5.1-5.1: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (5.1-5.1: )
+-> $$ = nterm Identifier (5.1-5.1: )
+Stack now 0 3 8 17 27 43 87
+Entering state 57
+Reading a token: Next token is token T_ASSIGNMENT (5.2-5.3: )
+Shifting token T_ASSIGNMENT (5.2-5.3: )
+Entering state 89
+Reading a token: Next token is token INT_LITERAL (5.4-5.4: )
+Shifting token INT_LITERAL (5.4-5.4: )
+Entering state 67
+Reducing stack by rule 88 (line 739):
+   $1 = token INT_LITERAL (5.4-5.4: )
+-> $$ = nterm Literal (5.4-5.4: )
+Stack now 0 3 8 17 27 43 87 57 89
+Entering state 78
+Reducing stack by rule 65 (line 577):
+   $1 = nterm Literal (5.4-5.4: )
+-> $$ = nterm Factor (5.4-5.4: )
+Stack now 0 3 8 17 27 43 87 57 89
+Entering state 74
+Reducing stack by rule 62 (line 563):
+   $1 = nterm Factor (5.4-5.4: )
+-> $$ = nterm NotFactor (5.4-5.4: )
+Stack now 0 3 8 17 27 43 87 57 89
+Entering state 73
+Reducing stack by rule 60 (line 547):
+   $1 = nterm NotFactor (5.4-5.4: )
+-> $$ = nterm Term (5.4-5.4: )
+Stack now 0 3 8 17 27 43 87 57 89
+Entering state 72
+Reading a token: Next token is token T_SEMICOLON (5.5-5.5: )
+Reducing stack by rule 58 (line 531):
+   $1 = nterm Term (5.4-5.4: )
+-> $$ = nterm SimpleExpression (5.4-5.4: )
+Stack now 0 3 8 17 27 43 87 57 89
+Entering state 71
+Next token is token T_SEMICOLON (5.5-5.5: )
+Reducing stack by rule 56 (line 517):
+   $1 = nterm SimpleExpression (5.4-5.4: )
+-> $$ = nterm Expression (5.4-5.4: )
+Stack now 0 3 8 17 27 43 87 57 89
+Entering state 122
+Reducing stack by rule 53 (line 480):
+   $1 = nterm Identifier (5.1-5.1: )
+   $2 = token T_ASSIGNMENT (5.2-5.3: )
+   $3 = nterm Expression (5.4-5.4: )
+-> $$ = nterm Assignment (5.1-5.4: )
+Stack now 0 3 8 17 27 43 87
+Entering state 53
+Reducing stack by rule 35 (line 382):
+   $1 = nterm Assignment (5.1-5.4: )
+-> $$ = nterm StatementMatched (5.1-5.4: )
+Stack now 0 3 8 17 27 43 87
+Entering state 44
+Reducing stack by rule 33 (line 377):
+   $1 = nterm StatementMatched (5.1-5.4: )
+-> $$ = nterm Statement (5.1-5.4: )
+Stack now 0 3 8 17 27 43 87
+Entering state 121
+Next token is token T_SEMICOLON (5.5-5.5: )
+Shifting token T_SEMICOLON (5.5-5.5: )
+Entering state 87
+Reading a token: Next token is token IDENTIFIER (6.1-6.1: )
+Shifting token IDENTIFIER (6.1-6.1: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (6.1-6.1: )
+-> $$ = nterm Identifier (6.1-6.1: )
+Stack now 0 3 8 17 27 43 87 121 87
+Entering state 57
+Reading a token: Next token is token T_ASSIGNMENT (6.2-6.3: )
+Shifting token T_ASSIGNMENT (6.2-6.3: )
+Entering state 89
+Reading a token: Next token is token IDENTIFIER (6.4-6.5: )
+Shifting token IDENTIFIER (6.4-6.5: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (6.4-6.5: )
+-> $$ = nterm Identifier (6.4-6.5: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89
+Entering state 77
+Reading a token: Next token is token T_STAR (6.6-6.6: )
+Reducing stack by rule 64 (line 576):
+   $1 = nterm Identifier (6.4-6.5: )
+-> $$ = nterm Factor (6.4-6.5: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89
+Entering state 74
+Reducing stack by rule 62 (line 563):
+   $1 = nterm Factor (6.4-6.5: )
+-> $$ = nterm NotFactor (6.4-6.5: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89
+Entering state 73
+Reducing stack by rule 60 (line 547):
+   $1 = nterm NotFactor (6.4-6.5: )
+-> $$ = nterm Term (6.4-6.5: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89
+Entering state 72
+Next token is token T_STAR (6.6-6.6: )
+Shifting token T_STAR (6.6-6.6: )
+Entering state 111
+Reducing stack by rule 77 (line 653):
+   $1 = token T_STAR (6.6-6.6: )
+-> $$ = nterm MulOp (6.6-6.6: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89 72
+Entering state 112
+Reading a token: Next token is token IDENTIFIER (6.7-6.7: )
+Shifting token IDENTIFIER (6.7-6.7: )
+Entering state 4
+Reducing stack by rule 87 (line 726):
+   $1 = token IDENTIFIER (6.7-6.7: )
+-> $$ = nterm Identifier (6.7-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89 72 112
+Entering state 77
+Reading a token: Next token is token T_SEMICOLON (6.8-6.8: )
+Reducing stack by rule 64 (line 576):
+   $1 = nterm Identifier (6.7-6.7: )
+-> $$ = nterm Factor (6.7-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89 72 112
+Entering state 74
+Reducing stack by rule 62 (line 563):
+   $1 = nterm Factor (6.7-6.7: )
+-> $$ = nterm NotFactor (6.7-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89 72 112
+Entering state 137
+Reducing stack by rule 61 (line 548):
+   $1 = nterm Term (6.4-6.5: )
+   $2 = nterm MulOp (6.6-6.6: )
+   $3 = nterm NotFactor (6.7-6.7: )
+-> $$ = nterm Term (6.4-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89
+Entering state 72
+Next token is token T_SEMICOLON (6.8-6.8: )
+Reducing stack by rule 58 (line 531):
+   $1 = nterm Term (6.4-6.7: )
+-> $$ = nterm SimpleExpression (6.4-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89
+Entering state 71
+Next token is token T_SEMICOLON (6.8-6.8: )
+Reducing stack by rule 56 (line 517):
+   $1 = nterm SimpleExpression (6.4-6.7: )
+-> $$ = nterm Expression (6.4-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87 57 89
+Entering state 122
+Reducing stack by rule 53 (line 480):
+   $1 = nterm Identifier (6.1-6.1: )
+   $2 = token T_ASSIGNMENT (6.2-6.3: )
+   $3 = nterm Expression (6.4-6.7: )
+-> $$ = nterm Assignment (6.1-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87
+Entering state 53
+Reducing stack by rule 35 (line 382):
+   $1 = nterm Assignment (6.1-6.7: )
+-> $$ = nterm StatementMatched (6.1-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87
+Entering state 44
+Reducing stack by rule 33 (line 377):
+   $1 = nterm StatementMatched (6.1-6.7: )
+-> $$ = nterm Statement (6.1-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87
+Entering state 121
+Next token is token T_SEMICOLON (6.8-6.8: )
+Shifting token T_SEMICOLON (6.8-6.8: )
+Entering state 87
+Reading a token: Next token is token T_END (7.1-7.3: )
+Error: line 7: syntax error, unexpected T_END
+Error: popping token T_SEMICOLON (6.8-6.8: )
+Stack now 0 3 8 17 27 43 87 121 87 121
+Error: popping nterm Statement (6.1-6.7: )
+Stack now 0 3 8 17 27 43 87 121 87
+Error: popping token T_SEMICOLON (5.5-5.5: )
+Stack now 0 3 8 17 27 43 87 121
+Error: popping nterm Statement (5.1-5.4: )
+Stack now 0 3 8 17 27 43 87
+Error: popping token T_SEMICOLON (4.7-4.7: )
+Stack now 0 3 8 17 27 43
+Error: popping nterm Statement (4.1-4.6: )
+Stack now 0 3 8 17 27
+Error: popping token T_BEGIN (3.1-3.5: )
+Stack now 0 3 8 17
+Error: popping nterm ProcFuncList (2.18-2.18: )
+Stack now 0 3 8
+Error: popping nterm VarDeclList (2.1-2.18: )
+Stack now 0 3
+Error: popping nterm ProgramDecl (1.1-1.17: )
+Stack now 0
+Cleanup: discarding lookahead token T_END (7.1-7.3: )
+Stack now 0
+Too many errors to compile.

@@ -1,0 +1,2089 @@
+State 3 conflicts: 4 reduce/reduce
+State 126 conflicts: 1 reduce/reduce
+State 134 conflicts: 1 shift/reduce
+State 155 conflicts: 1 reduce/reduce
+
+
+Grammar
+
+    0 $accept: Program $end
+
+    1 Program: ProgramDecl VarDeclList ProcFuncList ProgramBody
+
+    2 ProgramDecl: T_PROGRAM Identifier T_SEMICOLON
+
+    3 VarDeclList: /* empty */
+    4            | MultiVarDecl
+
+    5 MultiVarDecl: /* empty */
+    6             | VarDecl MultiVarDecl
+
+    7 VarDecl: T_VAR IdentifierList T_COLON TYPE_IDENTIFIER T_SEMICOLON
+
+    8 IdentifierList: SingleIdentifier MultiIdentifier
+
+    9 MultiIdentifier: /* empty */
+   10                | T_COMMA SingleIdentifier MultiIdentifier
+
+   11 SingleIdentifier: Identifier
+
+   12 ProcFuncList: /* empty */
+   13             | ProcFuncDecl MultiProcFuncDecl
+
+   14 MultiProcFuncDecl: /* empty */
+   15                  | ProcFuncDecl MultiProcFuncDecl
+
+   16 ProcFuncDecl: ProcDecl
+   17             | FuncDecl
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList T_RPAR T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+   20 ParamList: /* empty */
+   21          | SingleParam MultiParam
+
+   22 MultiParam: /* empty */
+   23           | T_COMMA SingleParam MultiParam
+
+   24 SingleParam: Identifier T_COLON TYPE_IDENTIFIER
+
+   25 ProgramBody: /* empty */
+   26            | T_BEGIN StatementList T_END T_DOT
+
+   27 Statements: Statement
+   28           | T_BEGIN StatementList T_END
+
+   29 StatementList: /* empty */
+   30              | Statement MultiStatement
+
+   31 MultiStatement: /* empty */
+   32               | T_SEMICOLON Statement MultiStatement
+
+   33 Statement: StatementMatched
+   34          | StatementUnmatched
+
+   35 StatementMatched: Assignment
+   36                 | IfStatementMatched
+   37                 | WhileStatement
+   38                 | ForStatement
+   39                 | Call
+   40                 | PrintStatement
+
+   41 StatementUnmatched: IfStatement
+   42                   | T_IF Expression T_THEN StatementMatched T_ELSE StatementUnmatched
+
+   43 IfStatement: T_IF Expression T_THEN Statements
+
+   44 IfStatementMatched: T_IF Expression T_THEN StatementMatched T_ELSE StatementMatched
+
+   45 PrintStatement: PrintIntStatement
+   46               | PrintCharStatement
+   47               | PrintBoolStatement
+   48               | PrintLineStatement
+
+   49 PrintIntStatement: T_PRINT_INT T_LPAR Expression T_RPAR
+
+   50 PrintCharStatement: T_PRINT_CHAR T_LPAR Expression T_RPAR
+
+   51 PrintBoolStatement: T_PRINT_BOOL T_LPAR Expression T_RPAR
+
+   52 PrintLineStatement: T_PRINT_LINE T_LPAR T_RPAR
+
+   53 Assignment: Identifier T_ASSIGNMENT Expression
+
+   54 WhileStatement: T_WHILE Expression T_DO Statements
+
+   55 ForStatement: T_FOR Assignment T_TO Expression T_DO Statements
+
+   56 Expression: SimpleExpression
+   57           | SimpleExpression RelOp SimpleExpression
+
+   58 SimpleExpression: Term
+   59                 | SimpleExpression AddOp Term
+
+   60 Term: NotFactor
+   61     | Term MulOp NotFactor
+
+   62 NotFactor: Factor
+   63          | NotOp Factor
+
+   64 Factor: Identifier
+   65       | Literal
+   66       | Call
+   67       | T_LPAR Expression T_RPAR
+
+   68 Call: Identifier T_LPAR CallParamList T_RPAR
+
+   69 CallParamList: /* empty */
+   70              | CallParameter MultiCallParameter
+
+   71 MultiCallParameter: /* empty */
+   72                   | T_COMMA CallParameter MultiCallParameter
+
+   73 CallParameter: Expression
+
+   74 AddOp: T_PLUS
+   75      | T_MINUS
+   76      | T_OR
+
+   77 MulOp: T_STAR
+   78      | T_SLASH
+   79      | T_AND
+
+   80 RelOp: T_LESSER
+   81      | T_LESSEREQUAL
+   82      | T_GREATER
+   83      | T_GREATEREQUAL
+   84      | T_EQUAL
+   85      | T_NOTEQUAL
+
+   86 NotOp: T_NOT
+
+   87 Identifier: IDENTIFIER
+
+   88 Literal: INT_LITERAL
+   89        | BOOL_LITERAL
+   90        | CHAR_LITERAL
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+T_OR (258) 76
+T_AND (259) 79
+T_NOTEQUAL (260) 85
+T_EQUAL (261) 84
+T_GREATEREQUAL (262) 83
+T_LESSEREQUAL (263) 81
+T_GREATER (264) 82
+T_LESSER (265) 80
+T_MINUS (266) 75
+T_PLUS (267) 74
+T_SLASH (268) 78
+T_STAR (269) 77
+T_NOT (270) 86
+T_PROGRAM (271) 2
+T_VAR (272) 7
+T_PROCEDURE (273) 18
+T_FUNCTION (274) 19
+T_BEGIN (275) 18 19 26 28
+T_END (276) 18 19 26 28
+T_IF (277) 42 43 44
+T_THEN (278) 42 43 44
+T_ELSE (279) 42 44
+T_WHILE (280) 54
+T_FOR (281) 55
+T_TO (282) 55
+T_DO (283) 54 55
+T_ASSIGNMENT (284) 53
+T_LPAR (285) 18 19 49 50 51 52 67 68
+T_RPAR (286) 18 19 49 50 51 52 67 68
+T_SEMICOLON (287) 2 7 18 19 32
+T_COLON (288) 7 19 24
+T_COMMA (289) 10 23 72
+T_DOT (290) 26
+T_PRINT_INT (291) 49
+T_PRINT_CHAR (292) 50
+T_PRINT_BOOL (293) 51
+T_PRINT_LINE (294) 52
+TYPE_IDENTIFIER (295) 7 19 24
+IDENTIFIER (296) 87
+INT_LITERAL (297) 88
+BOOL_LITERAL (298) 89
+CHAR_LITERAL (299) 90
+
+
+Nonterminals, with rules where they appear
+
+$accept (45)
+    on left: 0
+Program (46)
+    on left: 1, on right: 0
+ProgramDecl (47)
+    on left: 2, on right: 1
+VarDeclList (48)
+    on left: 3 4, on right: 1 18 19
+MultiVarDecl (49)
+    on left: 5 6, on right: 4 6
+VarDecl (50)
+    on left: 7, on right: 6
+IdentifierList (51)
+    on left: 8, on right: 7
+MultiIdentifier (52)
+    on left: 9 10, on right: 8 10
+SingleIdentifier (53)
+    on left: 11, on right: 8 10
+ProcFuncList (54)
+    on left: 12 13, on right: 1
+MultiProcFuncDecl (55)
+    on left: 14 15, on right: 13 15
+ProcFuncDecl (56)
+    on left: 16 17, on right: 13 15
+ProcDecl (57)
+    on left: 18, on right: 16
+FuncDecl (58)
+    on left: 19, on right: 17
+ParamList (59)
+    on left: 20 21, on right: 18 19
+MultiParam (60)
+    on left: 22 23, on right: 21 23
+SingleParam (61)
+    on left: 24, on right: 21 23
+ProgramBody (62)
+    on left: 25 26, on right: 1
+Statements (63)
+    on left: 27 28, on right: 43 54 55
+StatementList (64)
+    on left: 29 30, on right: 18 19 26 28
+MultiStatement (65)
+    on left: 31 32, on right: 30 32
+Statement (66)
+    on left: 33 34, on right: 27 30 32
+StatementMatched (67)
+    on left: 35 36 37 38 39 40, on right: 33 42 44
+StatementUnmatched (68)
+    on left: 41 42, on right: 34 42
+IfStatement (69)
+    on left: 43, on right: 41
+IfStatementMatched (70)
+    on left: 44, on right: 36
+PrintStatement (71)
+    on left: 45 46 47 48, on right: 40
+PrintIntStatement (72)
+    on left: 49, on right: 45
+PrintCharStatement (73)
+    on left: 50, on right: 46
+PrintBoolStatement (74)
+    on left: 51, on right: 47
+PrintLineStatement (75)
+    on left: 52, on right: 48
+Assignment (76)
+    on left: 53, on right: 35 55
+WhileStatement (77)
+    on left: 54, on right: 37
+ForStatement (78)
+    on left: 55, on right: 38
+Expression (79)
+    on left: 56 57, on right: 42 43 44 49 50 51 53 54 55 67 73
+SimpleExpression (80)
+    on left: 58 59, on right: 56 57 59
+Term (81)
+    on left: 60 61, on right: 58 59 61
+NotFactor (82)
+    on left: 62 63, on right: 60 61
+Factor (83)
+    on left: 64 65 66 67, on right: 62 63
+Call (84)
+    on left: 68, on right: 39 66
+CallParamList (85)
+    on left: 69 70, on right: 68
+MultiCallParameter (86)
+    on left: 71 72, on right: 70 72
+CallParameter (87)
+    on left: 73, on right: 70 72
+AddOp (88)
+    on left: 74 75 76, on right: 59
+MulOp (89)
+    on left: 77 78 79, on right: 61
+RelOp (90)
+    on left: 80 81 82 83 84 85, on right: 57
+NotOp (91)
+    on left: 86, on right: 63
+Identifier (92)
+    on left: 87, on right: 2 11 18 19 24 53 64 68
+Literal (93)
+    on left: 88 89 90, on right: 65
+
+
+state 0
+
+    0 $accept: . Program $end
+
+    T_PROGRAM  shift, and go to state 1
+
+    Program      go to state 2
+    ProgramDecl  go to state 3
+
+
+state 1
+
+    2 ProgramDecl: T_PROGRAM . Identifier T_SEMICOLON
+
+    IDENTIFIER  shift, and go to state 4
+
+    Identifier  go to state 5
+
+
+state 2
+
+    0 $accept: Program . $end
+
+    $end  shift, and go to state 6
+
+
+state 3
+
+    1 Program: ProgramDecl . VarDeclList ProcFuncList ProgramBody
+
+    T_VAR  shift, and go to state 7
+
+    $end         reduce using rule 3 (VarDeclList)
+    $end         [reduce using rule 5 (MultiVarDecl)]
+    T_PROCEDURE  reduce using rule 3 (VarDeclList)
+    T_PROCEDURE  [reduce using rule 5 (MultiVarDecl)]
+    T_FUNCTION   reduce using rule 3 (VarDeclList)
+    T_FUNCTION   [reduce using rule 5 (MultiVarDecl)]
+    T_BEGIN      reduce using rule 3 (VarDeclList)
+    T_BEGIN      [reduce using rule 5 (MultiVarDecl)]
+    $default     reduce using rule 3 (VarDeclList)
+
+    VarDeclList   go to state 8
+    MultiVarDecl  go to state 9
+    VarDecl       go to state 10
+
+
+state 4
+
+   87 Identifier: IDENTIFIER .
+
+    $default  reduce using rule 87 (Identifier)
+
+
+state 5
+
+    2 ProgramDecl: T_PROGRAM Identifier . T_SEMICOLON
+
+    T_SEMICOLON  shift, and go to state 11
+
+
+state 6
+
+    0 $accept: Program $end .
+
+    $default  accept
+
+
+state 7
+
+    7 VarDecl: T_VAR . IdentifierList T_COLON TYPE_IDENTIFIER T_SEMICOLON
+
+    IDENTIFIER  shift, and go to state 4
+
+    IdentifierList    go to state 12
+    SingleIdentifier  go to state 13
+    Identifier        go to state 14
+
+
+state 8
+
+    1 Program: ProgramDecl VarDeclList . ProcFuncList ProgramBody
+
+    T_PROCEDURE  shift, and go to state 15
+    T_FUNCTION   shift, and go to state 16
+
+    $default  reduce using rule 12 (ProcFuncList)
+
+    ProcFuncList  go to state 17
+    ProcFuncDecl  go to state 18
+    ProcDecl      go to state 19
+    FuncDecl      go to state 20
+
+
+state 9
+
+    4 VarDeclList: MultiVarDecl .
+
+    $default  reduce using rule 4 (VarDeclList)
+
+
+state 10
+
+    6 MultiVarDecl: VarDecl . MultiVarDecl
+
+    T_VAR  shift, and go to state 7
+
+    $default  reduce using rule 5 (MultiVarDecl)
+
+    MultiVarDecl  go to state 21
+    VarDecl       go to state 10
+
+
+state 11
+
+    2 ProgramDecl: T_PROGRAM Identifier T_SEMICOLON .
+
+    $default  reduce using rule 2 (ProgramDecl)
+
+
+state 12
+
+    7 VarDecl: T_VAR IdentifierList . T_COLON TYPE_IDENTIFIER T_SEMICOLON
+
+    T_COLON  shift, and go to state 22
+
+
+state 13
+
+    8 IdentifierList: SingleIdentifier . MultiIdentifier
+
+    T_COMMA  shift, and go to state 23
+
+    $default  reduce using rule 9 (MultiIdentifier)
+
+    MultiIdentifier  go to state 24
+
+
+state 14
+
+   11 SingleIdentifier: Identifier .
+
+    $default  reduce using rule 11 (SingleIdentifier)
+
+
+state 15
+
+   18 ProcDecl: T_PROCEDURE . Identifier T_LPAR ParamList T_RPAR T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    IDENTIFIER  shift, and go to state 4
+
+    Identifier  go to state 25
+
+
+state 16
+
+   19 FuncDecl: T_FUNCTION . Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    IDENTIFIER  shift, and go to state 4
+
+    Identifier  go to state 26
+
+
+state 17
+
+    1 Program: ProgramDecl VarDeclList ProcFuncList . ProgramBody
+
+    T_BEGIN  shift, and go to state 27
+
+    $default  reduce using rule 25 (ProgramBody)
+
+    ProgramBody  go to state 28
+
+
+state 18
+
+   13 ProcFuncList: ProcFuncDecl . MultiProcFuncDecl
+
+    T_PROCEDURE  shift, and go to state 15
+    T_FUNCTION   shift, and go to state 16
+
+    $default  reduce using rule 14 (MultiProcFuncDecl)
+
+    MultiProcFuncDecl  go to state 29
+    ProcFuncDecl       go to state 30
+    ProcDecl           go to state 19
+    FuncDecl           go to state 20
+
+
+state 19
+
+   16 ProcFuncDecl: ProcDecl .
+
+    $default  reduce using rule 16 (ProcFuncDecl)
+
+
+state 20
+
+   17 ProcFuncDecl: FuncDecl .
+
+    $default  reduce using rule 17 (ProcFuncDecl)
+
+
+state 21
+
+    6 MultiVarDecl: VarDecl MultiVarDecl .
+
+    $default  reduce using rule 6 (MultiVarDecl)
+
+
+state 22
+
+    7 VarDecl: T_VAR IdentifierList T_COLON . TYPE_IDENTIFIER T_SEMICOLON
+
+    TYPE_IDENTIFIER  shift, and go to state 31
+
+
+state 23
+
+   10 MultiIdentifier: T_COMMA . SingleIdentifier MultiIdentifier
+
+    IDENTIFIER  shift, and go to state 4
+
+    SingleIdentifier  go to state 32
+    Identifier        go to state 14
+
+
+state 24
+
+    8 IdentifierList: SingleIdentifier MultiIdentifier .
+
+    $default  reduce using rule 8 (IdentifierList)
+
+
+state 25
+
+   18 ProcDecl: T_PROCEDURE Identifier . T_LPAR ParamList T_RPAR T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_LPAR  shift, and go to state 33
+
+
+state 26
+
+   19 FuncDecl: T_FUNCTION Identifier . T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_LPAR  shift, and go to state 34
+
+
+state 27
+
+   26 ProgramBody: T_BEGIN . StatementList T_END T_DOT
+
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    $default  reduce using rule 29 (StatementList)
+
+    StatementList       go to state 42
+    Statement           go to state 43
+    StatementMatched    go to state 44
+    StatementUnmatched  go to state 45
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 28
+
+    1 Program: ProgramDecl VarDeclList ProcFuncList ProgramBody .
+
+    $default  reduce using rule 1 (Program)
+
+
+state 29
+
+   13 ProcFuncList: ProcFuncDecl MultiProcFuncDecl .
+
+    $default  reduce using rule 13 (ProcFuncList)
+
+
+state 30
+
+   15 MultiProcFuncDecl: ProcFuncDecl . MultiProcFuncDecl
+
+    T_PROCEDURE  shift, and go to state 15
+    T_FUNCTION   shift, and go to state 16
+
+    $default  reduce using rule 14 (MultiProcFuncDecl)
+
+    MultiProcFuncDecl  go to state 58
+    ProcFuncDecl       go to state 30
+    ProcDecl           go to state 19
+    FuncDecl           go to state 20
+
+
+state 31
+
+    7 VarDecl: T_VAR IdentifierList T_COLON TYPE_IDENTIFIER . T_SEMICOLON
+
+    T_SEMICOLON  shift, and go to state 59
+
+
+state 32
+
+   10 MultiIdentifier: T_COMMA SingleIdentifier . MultiIdentifier
+
+    T_COMMA  shift, and go to state 23
+
+    $default  reduce using rule 9 (MultiIdentifier)
+
+    MultiIdentifier  go to state 60
+
+
+state 33
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR . ParamList T_RPAR T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    IDENTIFIER  shift, and go to state 4
+
+    $default  reduce using rule 20 (ParamList)
+
+    ParamList    go to state 61
+    SingleParam  go to state 62
+    Identifier   go to state 63
+
+
+state 34
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR . ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    IDENTIFIER  shift, and go to state 4
+
+    $default  reduce using rule 20 (ParamList)
+
+    ParamList    go to state 64
+    SingleParam  go to state 62
+    Identifier   go to state 63
+
+
+state 35
+
+   42 StatementUnmatched: T_IF . Expression T_THEN StatementMatched T_ELSE StatementUnmatched
+   43 IfStatement: T_IF . Expression T_THEN Statements
+   44 IfStatementMatched: T_IF . Expression T_THEN StatementMatched T_ELSE StatementMatched
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 70
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 36
+
+   54 WhileStatement: T_WHILE . Expression T_DO Statements
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 79
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 37
+
+   55 ForStatement: T_FOR . Assignment T_TO Expression T_DO Statements
+
+    IDENTIFIER  shift, and go to state 4
+
+    Assignment  go to state 80
+    Identifier  go to state 81
+
+
+state 38
+
+   49 PrintIntStatement: T_PRINT_INT . T_LPAR Expression T_RPAR
+
+    T_LPAR  shift, and go to state 82
+
+
+state 39
+
+   50 PrintCharStatement: T_PRINT_CHAR . T_LPAR Expression T_RPAR
+
+    T_LPAR  shift, and go to state 83
+
+
+state 40
+
+   51 PrintBoolStatement: T_PRINT_BOOL . T_LPAR Expression T_RPAR
+
+    T_LPAR  shift, and go to state 84
+
+
+state 41
+
+   52 PrintLineStatement: T_PRINT_LINE . T_LPAR T_RPAR
+
+    T_LPAR  shift, and go to state 85
+
+
+state 42
+
+   26 ProgramBody: T_BEGIN StatementList . T_END T_DOT
+
+    T_END  shift, and go to state 86
+
+
+state 43
+
+   30 StatementList: Statement . MultiStatement
+
+    T_SEMICOLON  shift, and go to state 87
+
+    $default  reduce using rule 31 (MultiStatement)
+
+    MultiStatement  go to state 88
+
+
+state 44
+
+   33 Statement: StatementMatched .
+
+    $default  reduce using rule 33 (Statement)
+
+
+state 45
+
+   34 Statement: StatementUnmatched .
+
+    $default  reduce using rule 34 (Statement)
+
+
+state 46
+
+   41 StatementUnmatched: IfStatement .
+
+    $default  reduce using rule 41 (StatementUnmatched)
+
+
+state 47
+
+   36 StatementMatched: IfStatementMatched .
+
+    $default  reduce using rule 36 (StatementMatched)
+
+
+state 48
+
+   40 StatementMatched: PrintStatement .
+
+    $default  reduce using rule 40 (StatementMatched)
+
+
+state 49
+
+   45 PrintStatement: PrintIntStatement .
+
+    $default  reduce using rule 45 (PrintStatement)
+
+
+state 50
+
+   46 PrintStatement: PrintCharStatement .
+
+    $default  reduce using rule 46 (PrintStatement)
+
+
+state 51
+
+   47 PrintStatement: PrintBoolStatement .
+
+    $default  reduce using rule 47 (PrintStatement)
+
+
+state 52
+
+   48 PrintStatement: PrintLineStatement .
+
+    $default  reduce using rule 48 (PrintStatement)
+
+
+state 53
+
+   35 StatementMatched: Assignment .
+
+    $default  reduce using rule 35 (StatementMatched)
+
+
+state 54
+
+   37 StatementMatched: WhileStatement .
+
+    $default  reduce using rule 37 (StatementMatched)
+
+
+state 55
+
+   38 StatementMatched: ForStatement .
+
+    $default  reduce using rule 38 (StatementMatched)
+
+
+state 56
+
+   39 StatementMatched: Call .
+
+    $default  reduce using rule 39 (StatementMatched)
+
+
+state 57
+
+   53 Assignment: Identifier . T_ASSIGNMENT Expression
+   68 Call: Identifier . T_LPAR CallParamList T_RPAR
+
+    T_ASSIGNMENT  shift, and go to state 89
+    T_LPAR        shift, and go to state 90
+
+
+state 58
+
+   15 MultiProcFuncDecl: ProcFuncDecl MultiProcFuncDecl .
+
+    $default  reduce using rule 15 (MultiProcFuncDecl)
+
+
+state 59
+
+    7 VarDecl: T_VAR IdentifierList T_COLON TYPE_IDENTIFIER T_SEMICOLON .
+
+    $default  reduce using rule 7 (VarDecl)
+
+
+state 60
+
+   10 MultiIdentifier: T_COMMA SingleIdentifier MultiIdentifier .
+
+    $default  reduce using rule 10 (MultiIdentifier)
+
+
+state 61
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList . T_RPAR T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_RPAR  shift, and go to state 91
+
+
+state 62
+
+   21 ParamList: SingleParam . MultiParam
+
+    T_COMMA  shift, and go to state 92
+
+    $default  reduce using rule 22 (MultiParam)
+
+    MultiParam  go to state 93
+
+
+state 63
+
+   24 SingleParam: Identifier . T_COLON TYPE_IDENTIFIER
+
+    T_COLON  shift, and go to state 94
+
+
+state 64
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList . T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_RPAR  shift, and go to state 95
+
+
+state 65
+
+   86 NotOp: T_NOT .
+
+    $default  reduce using rule 86 (NotOp)
+
+
+state 66
+
+   67 Factor: T_LPAR . Expression T_RPAR
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 96
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 67
+
+   88 Literal: INT_LITERAL .
+
+    $default  reduce using rule 88 (Literal)
+
+
+state 68
+
+   89 Literal: BOOL_LITERAL .
+
+    $default  reduce using rule 89 (Literal)
+
+
+state 69
+
+   90 Literal: CHAR_LITERAL .
+
+    $default  reduce using rule 90 (Literal)
+
+
+state 70
+
+   42 StatementUnmatched: T_IF Expression . T_THEN StatementMatched T_ELSE StatementUnmatched
+   43 IfStatement: T_IF Expression . T_THEN Statements
+   44 IfStatementMatched: T_IF Expression . T_THEN StatementMatched T_ELSE StatementMatched
+
+    T_THEN  shift, and go to state 97
+
+
+state 71
+
+   56 Expression: SimpleExpression .
+   57           | SimpleExpression . RelOp SimpleExpression
+   59 SimpleExpression: SimpleExpression . AddOp Term
+
+    T_OR            shift, and go to state 98
+    T_NOTEQUAL      shift, and go to state 99
+    T_EQUAL         shift, and go to state 100
+    T_GREATEREQUAL  shift, and go to state 101
+    T_LESSEREQUAL   shift, and go to state 102
+    T_GREATER       shift, and go to state 103
+    T_LESSER        shift, and go to state 104
+    T_MINUS         shift, and go to state 105
+    T_PLUS          shift, and go to state 106
+
+    $default  reduce using rule 56 (Expression)
+
+    AddOp  go to state 107
+    RelOp  go to state 108
+
+
+state 72
+
+   58 SimpleExpression: Term .
+   61 Term: Term . MulOp NotFactor
+
+    T_AND    shift, and go to state 109
+    T_SLASH  shift, and go to state 110
+    T_STAR   shift, and go to state 111
+
+    $default  reduce using rule 58 (SimpleExpression)
+
+    MulOp  go to state 112
+
+
+state 73
+
+   60 Term: NotFactor .
+
+    $default  reduce using rule 60 (Term)
+
+
+state 74
+
+   62 NotFactor: Factor .
+
+    $default  reduce using rule 62 (NotFactor)
+
+
+state 75
+
+   66 Factor: Call .
+
+    $default  reduce using rule 66 (Factor)
+
+
+state 76
+
+   63 NotFactor: NotOp . Factor
+
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Factor      go to state 113
+    Call        go to state 75
+    Identifier  go to state 77
+    Literal     go to state 78
+
+
+state 77
+
+   64 Factor: Identifier .
+   68 Call: Identifier . T_LPAR CallParamList T_RPAR
+
+    T_LPAR  shift, and go to state 90
+
+    $default  reduce using rule 64 (Factor)
+
+
+state 78
+
+   65 Factor: Literal .
+
+    $default  reduce using rule 65 (Factor)
+
+
+state 79
+
+   54 WhileStatement: T_WHILE Expression . T_DO Statements
+
+    T_DO  shift, and go to state 114
+
+
+state 80
+
+   55 ForStatement: T_FOR Assignment . T_TO Expression T_DO Statements
+
+    T_TO  shift, and go to state 115
+
+
+state 81
+
+   53 Assignment: Identifier . T_ASSIGNMENT Expression
+
+    T_ASSIGNMENT  shift, and go to state 89
+
+
+state 82
+
+   49 PrintIntStatement: T_PRINT_INT T_LPAR . Expression T_RPAR
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 116
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 83
+
+   50 PrintCharStatement: T_PRINT_CHAR T_LPAR . Expression T_RPAR
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 117
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 84
+
+   51 PrintBoolStatement: T_PRINT_BOOL T_LPAR . Expression T_RPAR
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 118
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 85
+
+   52 PrintLineStatement: T_PRINT_LINE T_LPAR . T_RPAR
+
+    T_RPAR  shift, and go to state 119
+
+
+state 86
+
+   26 ProgramBody: T_BEGIN StatementList T_END . T_DOT
+
+    T_DOT  shift, and go to state 120
+
+
+state 87
+
+   32 MultiStatement: T_SEMICOLON . Statement MultiStatement
+
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    Statement           go to state 121
+    StatementMatched    go to state 44
+    StatementUnmatched  go to state 45
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 88
+
+   30 StatementList: Statement MultiStatement .
+
+    $default  reduce using rule 30 (StatementList)
+
+
+state 89
+
+   53 Assignment: Identifier T_ASSIGNMENT . Expression
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 122
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 90
+
+   68 Call: Identifier T_LPAR . CallParamList T_RPAR
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    $default  reduce using rule 69 (CallParamList)
+
+    Expression        go to state 123
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    CallParamList     go to state 124
+    CallParameter     go to state 125
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 91
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList T_RPAR . T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_SEMICOLON  shift, and go to state 126
+
+
+state 92
+
+   23 MultiParam: T_COMMA . SingleParam MultiParam
+
+    IDENTIFIER  shift, and go to state 4
+
+    SingleParam  go to state 127
+    Identifier   go to state 63
+
+
+state 93
+
+   21 ParamList: SingleParam MultiParam .
+
+    $default  reduce using rule 21 (ParamList)
+
+
+state 94
+
+   24 SingleParam: Identifier T_COLON . TYPE_IDENTIFIER
+
+    TYPE_IDENTIFIER  shift, and go to state 128
+
+
+state 95
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR . T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_COLON  shift, and go to state 129
+
+
+state 96
+
+   67 Factor: T_LPAR Expression . T_RPAR
+
+    T_RPAR  shift, and go to state 130
+
+
+state 97
+
+   42 StatementUnmatched: T_IF Expression T_THEN . StatementMatched T_ELSE StatementUnmatched
+   43 IfStatement: T_IF Expression T_THEN . Statements
+   44 IfStatementMatched: T_IF Expression T_THEN . StatementMatched T_ELSE StatementMatched
+
+    T_BEGIN       shift, and go to state 131
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    Statements          go to state 132
+    Statement           go to state 133
+    StatementMatched    go to state 134
+    StatementUnmatched  go to state 45
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 98
+
+   76 AddOp: T_OR .
+
+    $default  reduce using rule 76 (AddOp)
+
+
+state 99
+
+   85 RelOp: T_NOTEQUAL .
+
+    $default  reduce using rule 85 (RelOp)
+
+
+state 100
+
+   84 RelOp: T_EQUAL .
+
+    $default  reduce using rule 84 (RelOp)
+
+
+state 101
+
+   83 RelOp: T_GREATEREQUAL .
+
+    $default  reduce using rule 83 (RelOp)
+
+
+state 102
+
+   81 RelOp: T_LESSEREQUAL .
+
+    $default  reduce using rule 81 (RelOp)
+
+
+state 103
+
+   82 RelOp: T_GREATER .
+
+    $default  reduce using rule 82 (RelOp)
+
+
+state 104
+
+   80 RelOp: T_LESSER .
+
+    $default  reduce using rule 80 (RelOp)
+
+
+state 105
+
+   75 AddOp: T_MINUS .
+
+    $default  reduce using rule 75 (AddOp)
+
+
+state 106
+
+   74 AddOp: T_PLUS .
+
+    $default  reduce using rule 74 (AddOp)
+
+
+state 107
+
+   59 SimpleExpression: SimpleExpression AddOp . Term
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Term        go to state 135
+    NotFactor   go to state 73
+    Factor      go to state 74
+    Call        go to state 75
+    NotOp       go to state 76
+    Identifier  go to state 77
+    Literal     go to state 78
+
+
+state 108
+
+   57 Expression: SimpleExpression RelOp . SimpleExpression
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    SimpleExpression  go to state 136
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 109
+
+   79 MulOp: T_AND .
+
+    $default  reduce using rule 79 (MulOp)
+
+
+state 110
+
+   78 MulOp: T_SLASH .
+
+    $default  reduce using rule 78 (MulOp)
+
+
+state 111
+
+   77 MulOp: T_STAR .
+
+    $default  reduce using rule 77 (MulOp)
+
+
+state 112
+
+   61 Term: Term MulOp . NotFactor
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    NotFactor   go to state 137
+    Factor      go to state 74
+    Call        go to state 75
+    NotOp       go to state 76
+    Identifier  go to state 77
+    Literal     go to state 78
+
+
+state 113
+
+   63 NotFactor: NotOp Factor .
+
+    $default  reduce using rule 63 (NotFactor)
+
+
+state 114
+
+   54 WhileStatement: T_WHILE Expression T_DO . Statements
+
+    T_BEGIN       shift, and go to state 131
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    Statements          go to state 138
+    Statement           go to state 133
+    StatementMatched    go to state 44
+    StatementUnmatched  go to state 45
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 115
+
+   55 ForStatement: T_FOR Assignment T_TO . Expression T_DO Statements
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 139
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 116
+
+   49 PrintIntStatement: T_PRINT_INT T_LPAR Expression . T_RPAR
+
+    T_RPAR  shift, and go to state 140
+
+
+state 117
+
+   50 PrintCharStatement: T_PRINT_CHAR T_LPAR Expression . T_RPAR
+
+    T_RPAR  shift, and go to state 141
+
+
+state 118
+
+   51 PrintBoolStatement: T_PRINT_BOOL T_LPAR Expression . T_RPAR
+
+    T_RPAR  shift, and go to state 142
+
+
+state 119
+
+   52 PrintLineStatement: T_PRINT_LINE T_LPAR T_RPAR .
+
+    $default  reduce using rule 52 (PrintLineStatement)
+
+
+state 120
+
+   26 ProgramBody: T_BEGIN StatementList T_END T_DOT .
+
+    $default  reduce using rule 26 (ProgramBody)
+
+
+state 121
+
+   32 MultiStatement: T_SEMICOLON Statement . MultiStatement
+
+    T_SEMICOLON  shift, and go to state 87
+
+    $default  reduce using rule 31 (MultiStatement)
+
+    MultiStatement  go to state 143
+
+
+state 122
+
+   53 Assignment: Identifier T_ASSIGNMENT Expression .
+
+    $default  reduce using rule 53 (Assignment)
+
+
+state 123
+
+   73 CallParameter: Expression .
+
+    $default  reduce using rule 73 (CallParameter)
+
+
+state 124
+
+   68 Call: Identifier T_LPAR CallParamList . T_RPAR
+
+    T_RPAR  shift, and go to state 144
+
+
+state 125
+
+   70 CallParamList: CallParameter . MultiCallParameter
+
+    T_COMMA  shift, and go to state 145
+
+    $default  reduce using rule 71 (MultiCallParameter)
+
+    MultiCallParameter  go to state 146
+
+
+state 126
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList T_RPAR T_SEMICOLON . VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_VAR  shift, and go to state 7
+
+    T_BEGIN   reduce using rule 3 (VarDeclList)
+    T_BEGIN   [reduce using rule 5 (MultiVarDecl)]
+    $default  reduce using rule 3 (VarDeclList)
+
+    VarDeclList   go to state 147
+    MultiVarDecl  go to state 9
+    VarDecl       go to state 10
+
+
+state 127
+
+   23 MultiParam: T_COMMA SingleParam . MultiParam
+
+    T_COMMA  shift, and go to state 92
+
+    $default  reduce using rule 22 (MultiParam)
+
+    MultiParam  go to state 148
+
+
+state 128
+
+   24 SingleParam: Identifier T_COLON TYPE_IDENTIFIER .
+
+    $default  reduce using rule 24 (SingleParam)
+
+
+state 129
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON . TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    TYPE_IDENTIFIER  shift, and go to state 149
+
+
+state 130
+
+   67 Factor: T_LPAR Expression T_RPAR .
+
+    $default  reduce using rule 67 (Factor)
+
+
+state 131
+
+   28 Statements: T_BEGIN . StatementList T_END
+
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    $default  reduce using rule 29 (StatementList)
+
+    StatementList       go to state 150
+    Statement           go to state 43
+    StatementMatched    go to state 44
+    StatementUnmatched  go to state 45
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 132
+
+   43 IfStatement: T_IF Expression T_THEN Statements .
+
+    $default  reduce using rule 43 (IfStatement)
+
+
+state 133
+
+   27 Statements: Statement .
+
+    $default  reduce using rule 27 (Statements)
+
+
+state 134
+
+   33 Statement: StatementMatched .
+   42 StatementUnmatched: T_IF Expression T_THEN StatementMatched . T_ELSE StatementUnmatched
+   44 IfStatementMatched: T_IF Expression T_THEN StatementMatched . T_ELSE StatementMatched
+
+    T_ELSE  shift, and go to state 151
+
+    T_ELSE    [reduce using rule 33 (Statement)]
+    $default  reduce using rule 33 (Statement)
+
+
+state 135
+
+   59 SimpleExpression: SimpleExpression AddOp Term .
+   61 Term: Term . MulOp NotFactor
+
+    T_AND    shift, and go to state 109
+    T_SLASH  shift, and go to state 110
+    T_STAR   shift, and go to state 111
+
+    $default  reduce using rule 59 (SimpleExpression)
+
+    MulOp  go to state 112
+
+
+state 136
+
+   57 Expression: SimpleExpression RelOp SimpleExpression .
+   59 SimpleExpression: SimpleExpression . AddOp Term
+
+    T_OR     shift, and go to state 98
+    T_MINUS  shift, and go to state 105
+    T_PLUS   shift, and go to state 106
+
+    $default  reduce using rule 57 (Expression)
+
+    AddOp  go to state 107
+
+
+state 137
+
+   61 Term: Term MulOp NotFactor .
+
+    $default  reduce using rule 61 (Term)
+
+
+state 138
+
+   54 WhileStatement: T_WHILE Expression T_DO Statements .
+
+    $default  reduce using rule 54 (WhileStatement)
+
+
+state 139
+
+   55 ForStatement: T_FOR Assignment T_TO Expression . T_DO Statements
+
+    T_DO  shift, and go to state 152
+
+
+state 140
+
+   49 PrintIntStatement: T_PRINT_INT T_LPAR Expression T_RPAR .
+
+    $default  reduce using rule 49 (PrintIntStatement)
+
+
+state 141
+
+   50 PrintCharStatement: T_PRINT_CHAR T_LPAR Expression T_RPAR .
+
+    $default  reduce using rule 50 (PrintCharStatement)
+
+
+state 142
+
+   51 PrintBoolStatement: T_PRINT_BOOL T_LPAR Expression T_RPAR .
+
+    $default  reduce using rule 51 (PrintBoolStatement)
+
+
+state 143
+
+   32 MultiStatement: T_SEMICOLON Statement MultiStatement .
+
+    $default  reduce using rule 32 (MultiStatement)
+
+
+state 144
+
+   68 Call: Identifier T_LPAR CallParamList T_RPAR .
+
+    $default  reduce using rule 68 (Call)
+
+
+state 145
+
+   72 MultiCallParameter: T_COMMA . CallParameter MultiCallParameter
+
+    T_NOT         shift, and go to state 65
+    T_LPAR        shift, and go to state 66
+    IDENTIFIER    shift, and go to state 4
+    INT_LITERAL   shift, and go to state 67
+    BOOL_LITERAL  shift, and go to state 68
+    CHAR_LITERAL  shift, and go to state 69
+
+    Expression        go to state 123
+    SimpleExpression  go to state 71
+    Term              go to state 72
+    NotFactor         go to state 73
+    Factor            go to state 74
+    Call              go to state 75
+    CallParameter     go to state 153
+    NotOp             go to state 76
+    Identifier        go to state 77
+    Literal           go to state 78
+
+
+state 146
+
+   70 CallParamList: CallParameter MultiCallParameter .
+
+    $default  reduce using rule 70 (CallParamList)
+
+
+state 147
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList T_RPAR T_SEMICOLON VarDeclList . T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_BEGIN  shift, and go to state 154
+
+
+state 148
+
+   23 MultiParam: T_COMMA SingleParam MultiParam .
+
+    $default  reduce using rule 23 (MultiParam)
+
+
+state 149
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER . T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_SEMICOLON  shift, and go to state 155
+
+
+state 150
+
+   28 Statements: T_BEGIN StatementList . T_END
+
+    T_END  shift, and go to state 156
+
+
+state 151
+
+   42 StatementUnmatched: T_IF Expression T_THEN StatementMatched T_ELSE . StatementUnmatched
+   44 IfStatementMatched: T_IF Expression T_THEN StatementMatched T_ELSE . StatementMatched
+
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    StatementMatched    go to state 157
+    StatementUnmatched  go to state 158
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 152
+
+   55 ForStatement: T_FOR Assignment T_TO Expression T_DO . Statements
+
+    T_BEGIN       shift, and go to state 131
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    Statements          go to state 159
+    Statement           go to state 133
+    StatementMatched    go to state 44
+    StatementUnmatched  go to state 45
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 153
+
+   72 MultiCallParameter: T_COMMA CallParameter . MultiCallParameter
+
+    T_COMMA  shift, and go to state 145
+
+    $default  reduce using rule 71 (MultiCallParameter)
+
+    MultiCallParameter  go to state 160
+
+
+state 154
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList T_RPAR T_SEMICOLON VarDeclList T_BEGIN . StatementList T_END T_SEMICOLON
+
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    $default  reduce using rule 29 (StatementList)
+
+    StatementList       go to state 161
+    Statement           go to state 43
+    StatementMatched    go to state 44
+    StatementUnmatched  go to state 45
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 155
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON . VarDeclList T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_VAR  shift, and go to state 7
+
+    T_BEGIN   reduce using rule 3 (VarDeclList)
+    T_BEGIN   [reduce using rule 5 (MultiVarDecl)]
+    $default  reduce using rule 3 (VarDeclList)
+
+    VarDeclList   go to state 162
+    MultiVarDecl  go to state 9
+    VarDecl       go to state 10
+
+
+state 156
+
+   28 Statements: T_BEGIN StatementList T_END .
+
+    $default  reduce using rule 28 (Statements)
+
+
+state 157
+
+   44 IfStatementMatched: T_IF Expression T_THEN StatementMatched T_ELSE StatementMatched .
+
+    $default  reduce using rule 44 (IfStatementMatched)
+
+
+state 158
+
+   42 StatementUnmatched: T_IF Expression T_THEN StatementMatched T_ELSE StatementUnmatched .
+
+    $default  reduce using rule 42 (StatementUnmatched)
+
+
+state 159
+
+   55 ForStatement: T_FOR Assignment T_TO Expression T_DO Statements .
+
+    $default  reduce using rule 55 (ForStatement)
+
+
+state 160
+
+   72 MultiCallParameter: T_COMMA CallParameter MultiCallParameter .
+
+    $default  reduce using rule 72 (MultiCallParameter)
+
+
+state 161
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList T_RPAR T_SEMICOLON VarDeclList T_BEGIN StatementList . T_END T_SEMICOLON
+
+    T_END  shift, and go to state 163
+
+
+state 162
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList . T_BEGIN StatementList T_END T_SEMICOLON
+
+    T_BEGIN  shift, and go to state 164
+
+
+state 163
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList T_RPAR T_SEMICOLON VarDeclList T_BEGIN StatementList T_END . T_SEMICOLON
+
+    T_SEMICOLON  shift, and go to state 165
+
+
+state 164
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN . StatementList T_END T_SEMICOLON
+
+    T_IF          shift, and go to state 35
+    T_WHILE       shift, and go to state 36
+    T_FOR         shift, and go to state 37
+    T_PRINT_INT   shift, and go to state 38
+    T_PRINT_CHAR  shift, and go to state 39
+    T_PRINT_BOOL  shift, and go to state 40
+    T_PRINT_LINE  shift, and go to state 41
+    IDENTIFIER    shift, and go to state 4
+
+    $default  reduce using rule 29 (StatementList)
+
+    StatementList       go to state 166
+    Statement           go to state 43
+    StatementMatched    go to state 44
+    StatementUnmatched  go to state 45
+    IfStatement         go to state 46
+    IfStatementMatched  go to state 47
+    PrintStatement      go to state 48
+    PrintIntStatement   go to state 49
+    PrintCharStatement  go to state 50
+    PrintBoolStatement  go to state 51
+    PrintLineStatement  go to state 52
+    Assignment          go to state 53
+    WhileStatement      go to state 54
+    ForStatement        go to state 55
+    Call                go to state 56
+    Identifier          go to state 57
+
+
+state 165
+
+   18 ProcDecl: T_PROCEDURE Identifier T_LPAR ParamList T_RPAR T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON .
+
+    $default  reduce using rule 18 (ProcDecl)
+
+
+state 166
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList . T_END T_SEMICOLON
+
+    T_END  shift, and go to state 167
+
+
+state 167
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END . T_SEMICOLON
+
+    T_SEMICOLON  shift, and go to state 168
+
+
+state 168
+
+   19 FuncDecl: T_FUNCTION Identifier T_LPAR ParamList T_RPAR T_COLON TYPE_IDENTIFIER T_SEMICOLON VarDeclList T_BEGIN StatementList T_END T_SEMICOLON .
+
+    $default  reduce using rule 19 (FuncDecl)

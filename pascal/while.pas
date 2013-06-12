@@ -13,9 +13,7 @@ begin
 
     while b do
     begin
-        printboolean(b);
         b := false
     end;
 
-    printboolean(b)
 end.

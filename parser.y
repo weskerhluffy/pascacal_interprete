@@ -30,12 +30,14 @@ static void yyerror (/*YYLTYPE *locp, */const char *msg);
 static struct AstNode *ast;
 %}
 
+%debug
 %defines
 %locations
 %pure-parser
 %error-verbose
 /*%parse-param {ValaParser *parser}
 %lex-param {ValaParser *parser}*/
+%verbose
 
 %union {
     char* lexeme;
